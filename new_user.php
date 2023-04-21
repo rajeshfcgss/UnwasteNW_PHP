@@ -100,58 +100,54 @@
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-    debugger;
- 
-  
+    $(document).ready(function(){
+        $("#rzp-button1").click(function(){
+            debugger;
+            var options = {
+                "key":"rzp_test_ZTHPIZKigxqWkz", // Enter the Key ID generated from the Dashboard
+                "amount": "2000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Unwaste Network", //your business name
+                "description": "Unwaste Transaction",
+                "image": "https://drive.google.com/file/d/107yO_HikGRraMUzOacLSIVZq87fOru0e/view?usp=share_link",
+                //"order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+                "prefill": {
+                    "name": "<?php echo $_GET["firstname"]; ?>" , //your customer's name
+                    "email": "<?php echo $_GET["email"]; ?>",
+                    "contact": "<?php echo $_GET["number"]; ?>"
+                },
+                "notes": {
+                    "address": "<?php echo $_GET["address"]; ?>"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+	        var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
 
- 
-var options = {
-    "key":"rzp_test_ZTHPIZKigxqWkz", // Enter the Key ID generated from the Dashboard
-    "amount": "2000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Unwaste Network", //your business name
-    "description": "Unwaste Transaction",
-    "image": "https://drive.google.com/file/d/107yO_HikGRraMUzOacLSIVZq87fOru0e/view?usp=share_link",
-    //"order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-   
-    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-    "prefill": {
-        
-        "name": "<?php echo $_GET["firstname"]; ?>" , //your customer's name
-        "email": "<?php echo $_GET["email"]; ?>",
-        "contact": "<?php echo $_GET["number"]; ?>"
-    },
-    "notes": {
-        "address": "<?php echo $_GET["address"]; ?>"
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
-document.getElementById('rzp-button1').onclick = function(e){
-    rzp1.open();
-    e.preventDefault();
-}
-
-
-debugger;
-
-$.ajax({
-             
-            url:"http://localhost:7071/api/Transaction/Add",
-            type:"POST",
-            beforeSend: function(request) {
-                request.setRequestHeader("Authorization", "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGFkZHJlc3MiOiJhZG1pbkB1bndhc3RlLm9yZyIsInJvbGUiOiJBZG1pbiIsImV4cCI6MTY4MjQ4NDg1MCwiaXNzIjoiYXBpLm15YWRtaW4uY29tIiwiYXVkIjoiYXBpLm15YWRtaW4uY29tIn0.1kZEThGrOtS_e9ZpAYogbUeSTb2QjiY1WcmiPVFA2yo");
-            },
-            data:JSON.stringify(options),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(){
-                    debugger;
+            
+            
+            $.ajax({
+                url:"http://localhost:7071/api/Transaction/Add",
+                type:"POST",
+                beforeSend: function(request) {
+                    request.setRequestHeader("Authorization", "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGFkZHJlc3MiOiJhZG1pbkB1bndhc3RlLm9yZyIsInJvbGUiOiJBZG1pbiIsImV4cCI6MTY4MjQ4NDg1MCwiaXNzIjoiYXBpLm15YWRtaW4uY29tIiwiYXVkIjoiYXBpLm15YWRtaW4uY29tIn0.1kZEThGrOtS_e9ZpAYogbUeSTb2QjiY1WcmiPVFA2yo");
+                },
+                data:JSON.stringify(options),
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(){
                     alert("Data: " + options + "\nStatus: " );
                 }
-              });
+            });
+        });
+
+    });
+
+ 
               
         
         
