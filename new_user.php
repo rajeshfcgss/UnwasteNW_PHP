@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php include 'head.php';?>
 <head>
 <style>
@@ -18,10 +19,14 @@
             outline: none;
     }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
 </head>
-
+<?php include 'preloader.php';?>
 <body>
-  <?php include 'preloader.php';?>
     <div class="page-wrapper">
         <?php include 'header.php';?>
 
@@ -52,15 +57,15 @@
                                     <p class="project-details__content-text-1" style="text-align:left;">The following service agreement is entered in between:</p>
                                     <p class="project-details__content-text-1" style="text-align:left;"><b>1. UnWasteNetwork</b>, 19/33, Krishnaswamy Nagar, 50 Feet Road, Ramanthapuram, Coimbatore - 641045</p>
                                     <h3>and</h3>
-                                    <p class="project-details__content-text-2" style="text-align:left;"><b>2. </b><?php echo $_GET["fname"]; ?>&nbsp;<?php echo $_GET["lname"]; ?> <span style="font-weight:400;color:#878986;">from</span> <?php echo $_GET["address"]; ?>-<?php echo $_GET["pincode"]; ?> <span style="font-weight:400;color:#878986;">on</span> 20/01/2023</p>
+                                    <p class="project-details__content-text-2" style="text-align:left;"><b>2. </b><?php echo $_GET["firstname"]; ?>&nbsp;<?php echo $_GET["lname"]; ?> <span style="font-weight:400;color:#878986;">from</span> <?php echo $_GET["address"]; ?>-<?php echo $_GET["pincode"]; ?> <span style="font-weight:400;color:#878986;">on</span> 20/01/2023</p>
                                     <p class="project-details__content-text-3" style="text-align:left;">UnWasteNetwork will provide waste pickup services. This services include</p>
                                     <p class="project-details__content-text-3" style="text-align:left;">
                                     <ul style="text-align:left;">
                                         <li>Supply of Bags for pickup of wastes</li>
-                                        <li>Logistics services for pick up of waste from the premises : <span style="color:var(--wostin-base);"><?php echo $_GET["fname"]; ?>&nbsp; <?php echo $_GET["lname"]; ?>, <?php echo $_GET["address"]; ?></span></li>
+                                        <li>Logistics services for pick up of waste from the premises : <span style="color:var(--wostin-base);"><?php echo $_GET["firstname"]; ?>&nbsp; <?php echo $_GET["lname"]; ?>, <?php echo $_GET["address"]; ?></span></li>
                                         <li>Only on weekdays as per the logistics calendar given or based on pick up request.</li>
                                     </ul></p>
-                                    <p class="project-details__content-text-2" style="text-align:left;"><?php echo $_GET["fname"]; ?>&nbsp; <?php echo $_GET["lname"]; ?> <span style="font-weight:400;color:#878986;">responsibilities will comprise of</span></p>
+                                    <p class="project-details__content-text-2" style="text-align:left;"><?php echo $_GET["firstname"]; ?>&nbsp; <?php echo $_GET["lname"]; ?> <span style="font-weight:400;color:#878986;">responsibilities will comprise of</span></p>
                                     <p class="project-details__content-text-3" style="text-align:left;">
                                         <ul style="text-align:left;">
                                         <li>Provide dry waste by collecting in the Blue bag provided.</li>
@@ -85,32 +90,39 @@
         </section>
         <!--Request A Pickup End-->
 
- <?php include 'footer.php';?>
+<?php include 'footer.php';?>
 
 
     </div><!-- /.page-wrapper -->
 
-
-    <?php include 'end.php';?>
+   
 </body>
+
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
+    debugger;
+ 
+  
+
+ 
 var options = {
-    "key": "rzp_test_ZTHPIZKigxqWkz", // Enter the Key ID generated from the Dashboard
-    "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "key":"rzp_test_ZTHPIZKigxqWkz", // Enter the Key ID generated from the Dashboard
+    "amount": "2000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
-    "name": "Acme Corp", //your business name
-    "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
-    "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "name": "Unwaste Network", //your business name
+    "description": "Unwaste Transaction",
+    "image": "https://drive.google.com/file/d/107yO_HikGRraMUzOacLSIVZq87fOru0e/view?usp=share_link",
+    //"order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+   
     "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
     "prefill": {
-        "name": "Gaurav Kumar", //your customer's name
-        "email": "gaurav.kumar@example.com",
-        "contact": "9000090000"
+        
+        "name": "<?php echo $_GET["firstname"]; ?>" , //your customer's name
+        "email": "<?php echo $_GET["email"]; ?>",
+        "contact": "<?php echo $_GET["number"]; ?>"
     },
     "notes": {
-        "address": "Razorpay Corporate Office"
+        "address": "<?php echo $_GET["address"]; ?>"
     },
     "theme": {
         "color": "#3399cc"
@@ -121,5 +133,29 @@ document.getElementById('rzp-button1').onclick = function(e){
     rzp1.open();
     e.preventDefault();
 }
-</script>
+
+
+debugger;
+
+$.ajax({
+             
+            url:"http://localhost:7071/api/Transaction/Add",
+            type:"POST",
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGFkZHJlc3MiOiJhZG1pbkB1bndhc3RlLm9yZyIsInJvbGUiOiJBZG1pbiIsImV4cCI6MTY4MjQ4NDg1MCwiaXNzIjoiYXBpLm15YWRtaW4uY29tIiwiYXVkIjoiYXBpLm15YWRtaW4uY29tIn0.1kZEThGrOtS_e9ZpAYogbUeSTb2QjiY1WcmiPVFA2yo");
+            },
+            data:JSON.stringify(options),
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            success: function(){
+                    debugger;
+                    alert("Data: " + options + "\nStatus: " );
+                }
+              });
+              
+        
+        
+    
+</script> 
 </html>
+    <?php include 'end.php';?>
