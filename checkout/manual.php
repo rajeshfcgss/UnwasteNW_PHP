@@ -39,6 +39,7 @@
           $("#firstname2").text(cache.firstname);
         $("#lastname2").text(cache.lastname);
         $("#pincode").text(cache.postCode);
+        $("#amount").text(cache.amount);
     }); 
 </script>
 </head>
@@ -97,6 +98,7 @@
                                                 <span id="firstname1"></span>&nbsp;
                                                 <span id="lastname1"></span>,
                                                 <span id="address1"></span> 
+                                                <span id="amount"></span> 
                                             </span></li>
                                         <li>Only on weekdays as per the logistics calendar given or based on pick up
                                             request.</li>
@@ -154,9 +156,27 @@
     <input type="hidden" name="razorpay_signature"  id="razorpay_signature" >
 </form>
 <script>
+  
 var options = <?php echo $json?>;
 options.handler = function (response){
-    
+      var loc= localStorage.getItem('userdata');
+      var cache=JSON.parse(atob(loc)); 
+      cache.pid=response.razorpay_payment_id;
+       debugger;
+            $.ajax({
+                url:"http://localhost:7071/api/Customer/Add",
+                type:"POST",
+                beforeSend: function(request) {
+                    request.setRequestHeader("Authorization", "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGFkZHJlc3MiOiJhZG1pbkB1bndhc3RlbmV0d29yay5pbiIsInJvbGUiOiJBZG1pbiIsImV4cCI6MTY4MzIwMzQ2NywiaXNzIjoiYXBpLm15YWRtaW4uY29tIiwiYXVkIjoiYXBpLm15YWRtaW4uY29tIn0.PYMMgC_P_MXjWUIUoMhUw9zg2iv8otMA8mMzSLdlO3E");
+                },
+                data:JSON.stringify(cache),
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(){
+                        debugger;
+                        alert("Data: " + cache + "\nStatus: " );
+                    }
+                });
     document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
     document.getElementById('razorpay_signature').value = response.razorpay_signature;
     document.razorpayform.submit();

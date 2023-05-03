@@ -10,9 +10,10 @@ $api = new Api($keyId, $keySecret);
 
 $orderData = [
     'receipt' => 3456,
-    'amount' => (int)$_GET["amount"] * 100,
+    'amount' => intval($_GET["amount"]),
     'currency' => "INR",
     'payment_capture' => 1
+    
 ];
 
 $razorpayOrder = $api->order->create($orderData);
@@ -25,7 +26,7 @@ if ($displayCurrency !== 'INR') {
 
     $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;
 }
-  
+  print $amount;
 $data = [
     "key" => $keyId,
     "amount" => $amount,

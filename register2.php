@@ -584,8 +584,9 @@
     $(document).ready(function () {
         
         $("#firstname_single").val(cache.name);
-        $("#firstname_").val(cache.name);
+        $("#firstname_appartment").val(cache.name);
         $("#firstname_single").val(cache.name);
+        $("#mobileNumber_single").val(cache.phone);
     });  
     function Postdata() {
             debugger;
@@ -597,12 +598,11 @@
                 model=  {
                     firstname:document.getElementById('firstname_single').value,
                     lastname:document.getElementById('lastname_single').value,
-                    mobileNumber:cache.phone,
-                    sMobileNumber:document.getElementById('mobileNumber_single').value,
+                    mobileNumber:document.getElementById('mobileNumber_single').value,
                     emailAddress:document.getElementById('emailAddress_single').value,
                     servicetype:$("#servicetype .active-btn").attr("data-type"),
                     orderid:Math.random().toString().slice(2,11),
-                    amount:document.getElementById('amount_single').innerHTML= 500,
+                    amount:document.getElementById('amount_single').innerHTML= 50000,
                     //wastetype:document.getElementById('wastetype').value,
                     address:document.getElementById('address_single').value,
                     postCode:document.getElementById('postCode_single').value
@@ -621,7 +621,7 @@
                     emailAddress:document.getElementById('emailAddress_appartment').value,
                     servicetype:$("#servicetype .active-btn").attr("data-type"),
                     orderid:Math.random().toString().slice(2,11),
-                    amount:document.getElementById('amount_appartments').innerHTML= 1000,
+                    amount:document.getElementById('amount_appartments').innerHTML= 50000,
                     //wastetype:document.getElementById('wastetype').value,
                     address:document.getElementById('address_appartment').value,
                     postCode:document.getElementById('postCode_appartment').value
@@ -638,7 +638,7 @@
                     emailAddress:document.getElementById('emailAddress_commercial').value,
                     servicetype:$("#servicetype .active-btn").attr("data-type"),
                     orderid:Math.random().toString().slice(2,11),
-                    amount:document.getElementById('amount_commercial')..innerHTML= 1500,
+                    amount:document.getElementById('amount_commercial').innerHTML= 50000,
                     //wastetype:document.getElementById('wastetype').value,
                     address:document.getElementById('address_commercial').value,
                     postCode:document.getElementById('postCode_commercial').value
@@ -647,7 +647,7 @@
                 }
                 let encoded = window.btoa(JSON.stringify(model));    
                 localStorage.setItem('userdata',encoded);
-                window.location.href = "new_user.php?firstname="+model.firstname+"&email="+model.emailAddress+"&orderid="+model.orderid+"&address="+model.address+"amount="+model.amount;
+                window.location.href = "new_user.php?firstname="+model.firstname+"&email="+model.emailAddress+"&orderid="+model.orderid+"&address="+model.address+"&amount="+model.amount;
                 
             // $.ajax({
             //     url:"http://localhost:7071/api/Customer/Add",
