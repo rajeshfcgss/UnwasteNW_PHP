@@ -61,7 +61,7 @@
 
                             <div class="request-a-pickup__tab-content">
                                 <div class="request-a-pickup__tab-content-form-box">
-                                  <form class="request-a-pickup__tab-content-form" action="new_user.php" method="get" >
+                                  <form class="request-a-pickup__tab-content-form"   >
                                     <div class="row">
                                         <p class="request-a-pickup__tab-content-text-box" style="padding-bottom:10px;">New Users can fill in the form and register for the service.</p>
                                         <div class="col-xl-6">
@@ -126,10 +126,15 @@
                                                                     name="pincode" required>
                                                             </div>
                                                         </div>
+                                                         <div class="col-xl-12">
+                                                            <div class="request-a-pickup__tab-content-input-box">
+                                                                <p id ="amount_single" >500</p>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-xl-12" style="margin-top: -31px;margin-bottom: 20px;">
                                                             
                                                             <div style="text-align:right;">
-                                                                <button type="submit" class="thm-btn request-a-pickup__tab-content-btn" style="padding: 0px;padding-left: 3px;padding-right: 3px;
+                                                                <button type="button" class="thm-btn request-a-pickup__tab-content-btn" style="padding: 0px;padding-left: 3px;padding-right: 3px;
                                                                 font-weight: 300; font-size: 13px;"><span class="icon-placeholder"></span> Get Location</button>
                                                             </div>
                                                         </div>
@@ -145,8 +150,8 @@
                                                         <div class="col-xl-12">
                                                             
                                                             <div class="request-a-pickup__tab-content-btn-box" style="text-align:right;">
-                                                                <button type="submit"
-                                                                    class="thm-btn request-a-pickup__tab-content-btn" onclick="postData()">Proceed ></button>
+                                                                <button type="button" id="btn-proceed"
+                                                                    class="thm-btn request-a-pickup__tab-content-btn" onclick="Postdata()" >Proceed ></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -164,7 +169,7 @@
 
                             <div class="request-a-pickup__tab-content">
                                 <div class="request-a-pickup__tab-content-form-box">
-                                  <form class="request-a-pickup__tab-content-form" action="new_user.php" method="get">
+                                  <form class="request-a-pickup__tab-content-form" >
                                     <div class="row">
                                         <p class="request-a-pickup__tab-content-text-box" style="padding-bottom:10px;">New Users can fill in the form and register for the service.</p>
                                         <div class="col-xl-6">
@@ -238,7 +243,7 @@
                                                         <div class="col-xl-12" style="margin-top: -31px;margin-bottom: 20px;">
                                                             
                                                             <div style="text-align:right;">
-                                                                <button type="submit" class="thm-btn request-a-pickup__tab-content-btn" style="padding: 0px;padding-left: 3px;padding-right: 3px;
+                                                                <button type="button" class="thm-btn request-a-pickup__tab-content-btn" style="padding: 0px;padding-left: 3px;padding-right: 3px;
                                                                 font-weight: 300; font-size: 13px;"><span class="icon-placeholder"></span> Get Location</button>
                                                             </div>
                                                         </div>
@@ -254,8 +259,8 @@
                                                         <div class="col-xl-12">
                                                             
                                                             <div class="request-a-pickup__tab-content-btn-box" style="text-align:right;">
-                                                                <button type="submit"
-                                                                    class="thm-btn request-a-pickup__tab-content-btn" onclick="postData()">Proceed ></button>
+                                                                <button type="button"
+                                                                    class="thm-btn request-a-pickup__tab-content-btn" onclick="Postdata()">Proceed ></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -273,7 +278,7 @@
 
                             <div class="request-a-pickup__tab-content">
                                 <div class="request-a-pickup__tab-content-form-box">
-                                  <form class="request-a-pickup__tab-content-form" action="new_user.php" method="get">
+                                  <form class="request-a-pickup__tab-content-form" >
                                     <div class="row">
                                         <p class="request-a-pickup__tab-content-text-box" style="padding-bottom:10px;">New Users can fill in the form and register for the service.</p>
                                         <div class="col-xl-6">
@@ -341,7 +346,7 @@
                                                         <div class="col-xl-12" style="margin-top: -31px;margin-bottom: 20px;">
                                                             
                                                             <div style="text-align:right;">
-                                                                <button type="submit" class="thm-btn request-a-pickup__tab-content-btn" style="padding: 0px;padding-left: 3px;padding-right: 3px;
+                                                                <button type="button" class="thm-btn request-a-pickup__tab-content-btn" style="padding: 0px;padding-left: 3px;padding-right: 3px;
                                                                 font-weight: 300; font-size: 13px;"><span class="icon-placeholder"></span> Get Location</button>
                                                             </div>
                                                         </div>
@@ -357,8 +362,8 @@
                                                         <div class="col-xl-12">
                                                             
                                                             <div class="request-a-pickup__tab-content-btn-box" style="text-align:right;">
-                                                                <button type="submit"
-                                                                    class="thm-btn request-a-pickup__tab-content-btn"  onclick="postData()">Proceed ></button>
+                                                                <button type="button"
+                                                                    class="thm-btn request-a-pickup__tab-content-btn"  onclick="Postdata()">Proceed ></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -574,77 +579,91 @@
    
 </body>
 <script>
-
-
-    function postData(){
+    var loc= localStorage.getItem('userdata');
+    var cache=JSON.parse(atob(loc)); 
+    $(document).ready(function () {
         
-        // var jsondata = {"Amount" :400.0, "Currency" :"INR"}
-       debugger;
-       var model=null;
+        $("#firstname_single").val(cache.name);
+        $("#firstname_").val(cache.name);
+        $("#firstname_single").val(cache.name);
+    });  
+    function Postdata() {
+            debugger;
+            var model=null;
 
-       if($("#servicetype .active-btn").attr("data-type") =="Single")
-       { 
-        debugger;
-        model=  {
-           
-            firstname:document.getElementById('firstname_single').value,
-            lastname:document.getElementById('lastname_single').value,
-            mobileNumber:document.getElementById('mobileNumber_single').value,
-            emailAddress:document.getElementById('emailAddress_single').value,
-            servicetype:$("#servicetype .active-btn").attr("data-type"),
-            //wastetype:document.getElementById('wastetype').value,
-            address:document.getElementById('address_single').value,
-            postCode:document.getElementById('postCode_single').value
-                
-              };
-        }
-        else if($("#servicetype .active-btn").attr("data-type") =="Appartment")
-        {
-            debugger;
-            model=  {
-            firstname:document.getElementById('fullname_appartment').value,
-            name:document.getElementById('name_appartment').value,
-            designation:document.getElementById('designation_appartment').value,
-            noofHouse:document.getElementById('noofHouse_appartment').value,
-            emailAddress:document.getElementById('emailAddress_appartment').value,
-            servicetype:$("#servicetype .active-btn").attr("data-type"),
-            //wastetype:document.getElementById('wastetype').value,
-            address:document.getElementById('address_appartment').value,
-            postCode:document.getElementById('postCode_appartment').value
-                
-              };
-        }
-        else {
-            debugger;
-            model=  {
-            firstname:document.getElementById('fullname_commercial').value,
-            name:document.getElementById('name_commercial').value,
-            designation:document.getElementById('designation_commercial').value,
-            emailAddress:document.getElementById('emailAddress_commercial').value,
-            servicetype:$("#servicetype .active-btn").attr("data-type"),
-            //wastetype:document.getElementById('wastetype').value,
-            address:document.getElementById('address_commercial').value,
-            postCode:document.getElementById('postCode_commercial').value
-                
-              };
-        }
-        $.ajax({
-            url:"http://localhost:7071/api/Customer/Add",
-            type:"POST",
-            beforeSend: function(request) {
-                request.setRequestHeader("Authorization", "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGFkZHJlc3MiOiJhZG1pbkB1bndhc3RlLm9yZyIsInJvbGUiOiJBZG1pbiIsImV4cCI6MTY4MjMxMTU1MiwiaXNzIjoiYXBpLm15YWRtaW4uY29tIiwiYXVkIjoiYXBpLm15YWRtaW4uY29tIn0.lQ7LyHeEiCokPJF36RpI7Vtx8wjZ-n5IOpgpTfkwWcQ");
-            },
-            data:JSON.stringify(model),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(){
-                    debugger;
-                    alert("Data: " + model + "\nStatus: " );
+            if($("#servicetype .active-btn").attr("data-type") =="Single")
+            { 
+                debugger;
+                model=  {
+                    firstname:document.getElementById('firstname_single').value,
+                    lastname:document.getElementById('lastname_single').value,
+                    mobileNumber:cache.phone,
+                    sMobileNumber:document.getElementById('mobileNumber_single').value,
+                    emailAddress:document.getElementById('emailAddress_single').value,
+                    servicetype:$("#servicetype .active-btn").attr("data-type"),
+                    orderid:Math.random().toString().slice(2,11),
+                    amount:document.getElementById('amount_single').innerHTML= 500,
+                    //wastetype:document.getElementById('wastetype').value,
+                    address:document.getElementById('address_single').value,
+                    postCode:document.getElementById('postCode_single').value
+                        
+                    };
                 }
-              });
-              
-        
-
-    }
+                else if($("#servicetype .active-btn").attr("data-type") =="Appartment")
+                {
+                    debugger;
+                    model=  {
+                    firstname:document.getElementById('fullname_appartment').value,
+                    name:document.getElementById('name_appartment').value,
+                    designation:document.getElementById('designation_appartment').value,
+                    mobileNumber:cache.phone,
+                    noofHouse:document.getElementById('noofHouse_appartment').value,
+                    emailAddress:document.getElementById('emailAddress_appartment').value,
+                    servicetype:$("#servicetype .active-btn").attr("data-type"),
+                    orderid:Math.random().toString().slice(2,11),
+                    amount:document.getElementById('amount_appartments').innerHTML= 1000,
+                    //wastetype:document.getElementById('wastetype').value,
+                    address:document.getElementById('address_appartment').value,
+                    postCode:document.getElementById('postCode_appartment').value
+                        
+                    };
+                }
+                else {
+                    debugger;
+                    model=  {
+                    firstname:document.getElementById('fullname_commercial').value,
+                    name:document.getElementById('name_commercial').value,
+                    mobileNumber:cache.phone,
+                    designation:document.getElementById('designation_commercial').value,
+                    emailAddress:document.getElementById('emailAddress_commercial').value,
+                    servicetype:$("#servicetype .active-btn").attr("data-type"),
+                    orderid:Math.random().toString().slice(2,11),
+                    amount:document.getElementById('amount_commercial')..innerHTML= 1500,
+                    //wastetype:document.getElementById('wastetype').value,
+                    address:document.getElementById('address_commercial').value,
+                    postCode:document.getElementById('postCode_commercial').value
+                        
+                    };
+                }
+                let encoded = window.btoa(JSON.stringify(model));    
+                localStorage.setItem('userdata',encoded);
+                window.location.href = "new_user.php?firstname="+model.firstname+"&email="+model.emailAddress+"&orderid="+model.orderid+"&address="+model.address+"amount="+model.amount;
+                
+            // $.ajax({
+            //     url:"http://localhost:7071/api/Customer/Add",
+            //     type:"POST",
+            //     beforeSend: function(request) {
+            //         request.setRequestHeader("Authorization", "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGFkZHJlc3MiOiJhZG1pbkB1bndhc3RlLm9yZyIsInJvbGUiOiJBZG1pbiIsImV4cCI6MTY4Mjc0NTEwOSwiaXNzIjoiYXBpLm15YWRtaW4uY29tIiwiYXVkIjoiYXBpLm15YWRtaW4uY29tIn0.spWYZXtkPETEHJElDoal5q--D1PEo7Ni4mnWRqNwHfs");
+            //     },
+            //     data:JSON.stringify(model),
+            //     contentType:"application/json; charset=utf-8",
+            //     dataType:"json",
+            //     success: function(){
+            //             debugger;
+            //             alert("Data: " + model + "\nStatus: " );
+            //         }
+            //     });
+                
+            }
 </script>
 </html>

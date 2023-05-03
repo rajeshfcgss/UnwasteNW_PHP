@@ -19,6 +19,7 @@
 <p id="EmployeeName">hi</p>
 <p id="EmployeeDesignation"></p>
 <p id="EmployeeLocation"></p>
+<p ><?php echo $_GET["razorpay_payment_id"]; ?></p>
 
 </body>
 

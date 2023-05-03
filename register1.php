@@ -48,17 +48,17 @@
                     </div>
                     <div class="col-xl-6 col-lg-6">
                         <div class="contact-one__right">
-                            <form action="assets/inc/sendemail.php" class="contact-one__form contact-form-validated" novalidate="novalidate">
+                            <form  class="contact-one__form contact-form-validated" >
                                 <div class="row">
                                     <div class="col-xl-12 col-lg-12 col-md-12">
                                         <div class="contact-one__form-input-box">
-                                            <input type="text" placeholder="OTP" name="phone" maxlength="6" style="text-align:center;font-size:32px;">
+                                            <input id="otp" type="text" placeholder="OTP" name="phone" maxlength="6" style="text-align:center;font-size:32px;">
                                         </div>
                                     </div>
                                    <div class="col-xl-12">
                                                             
                                         <div class="request-a-pickup__tab-content-btn-box" style="text-align:center;">
-                                          <a href="register2.php" class="thm-btn request-a-pickup__tab-content-btn">Verify </a>
+                                          <a id="btn-verify" class="thm-btn request-a-pickup__tab-content-btn">Verify </a>
                                         </div>
                                     </div>
                                 </div>
@@ -265,6 +265,22 @@
 
     <!-- template js -->
     <script src="assets/js/wostin.js"></script>
+    <script>
+    $(document).ready(function () {
+        $("#btn-verify").click(function () {
+            debugger;
+            var loc= localStorage.getItem('userdata');
+            var model=JSON.parse(atob(loc)); 
+            var otp=$("#otp").val();
+            if(model.otp==otp)
+            {
+                window.location.href = "register2.php";
+            }
+        });
+    });
+    
+
+</script>
 </body>
 
 </html>
