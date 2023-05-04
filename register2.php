@@ -91,16 +91,17 @@
                                                         <div class="col-xl-12">
                                                                 <div class="request-a-pickup__tab-content-size-box">
                                                                     <label>Select the categories of waste to be handled in your service</label>
-                                                                    <ul class="list-unstyled request-a-pickup__tab-content-size-list">
+                                                                    <ul class="list-unstyled request-a-pickup__tab-content-size-list ">
                                                                         
                                                                         <li>
-                                                                            <input type="checkbox" name="wet" id="option_5">
+                                                                            <input type="checkbox" name="myCheck" value="wet"  id="option_5" class=checked onClick="myFunction()" >
                                                                             <label for="option_5"><span></span>Wet</label>
                                                                         </li>
                                                                         <li>
-                                                                            <input type="checkbox" name="dry" id="option_6">
+                                                                            <input type="checkbox"  name="myCheck" value="dry" id="option_6" class=checked onClick="myFunction()" >
                                                                             <label for="option_6"><span></span>Dry</label>
                                                                         </li>
+                                                                        <div id="demo"></div>
                                                                     </ul>
                                                                 </div>
                                                         </div>
@@ -240,6 +241,11 @@
                                                                     name="pincode" required>
                                                             </div>
                                                         </div>
+                                                        <div class="col-xl-12">
+                                                            <div class="request-a-pickup__tab-content-input-box">
+                                                                <p id ="amount_appartment" >500</p>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-xl-12" style="margin-top: -31px;margin-bottom: 20px;">
                                                             
                                                             <div style="text-align:right;">
@@ -341,6 +347,11 @@
                                                             <div class="request-a-pickup__tab-content-input-box">
                                                                 <input  id ="postCode_commercial" type="text" placeholder="Post Code*"
                                                                     name="pincode" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-12">
+                                                            <div class="request-a-pickup__tab-content-input-box">
+                                                                <p id ="amount_commercial" >500</p>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-12" style="margin-top: -31px;margin-bottom: 20px;">
@@ -579,6 +590,22 @@
    
 </body>
 <script>
+  
+    function myFunction() {
+        
+  var checkboxes = document.querySelectorAll('input[name="myCheck"]:checked'),
+      values = [],
+      len = checkboxes.length, i;
+   
+  for (i = 0; i < len; i++) {
+    values.push(checkboxes[i].value);
+  }
+ 
+  document.getElementById("demo").innerHTML = values.join(',');
+}
+</script>
+<script>
+ debugger;
     var loc= localStorage.getItem('userdata');
     var cache=JSON.parse(atob(loc)); 
     $(document).ready(function () {
@@ -587,9 +614,11 @@
         $("#firstname_appartment").val(cache.name);
         $("#firstname_single").val(cache.name);
         $("#mobileNumber_single").val(cache.phone);
+        
     });  
     function Postdata() {
             debugger;
+            
             var model=null;
 
             if($("#servicetype .active-btn").attr("data-type") =="Single")
@@ -603,7 +632,7 @@
                     servicetype:$("#servicetype .active-btn").attr("data-type"),
                     orderid:Math.random().toString().slice(2,11),
                     amount:document.getElementById('amount_single').innerHTML= 50000,
-                    //wastetype:document.getElementById('wastetype').value,
+                    wastetype:document.getElementById('demo').innerHTML,
                     address:document.getElementById('address_single').value,
                     postCode:document.getElementById('postCode_single').value
                         
@@ -622,7 +651,7 @@
                     servicetype:$("#servicetype .active-btn").attr("data-type"),
                     orderid:Math.random().toString().slice(2,11),
                     amount:document.getElementById('amount_appartments').innerHTML= 50000,
-                    //wastetype:document.getElementById('wastetype').value,
+                    wastetype:document.getElementById('demo').innerHTML,
                     address:document.getElementById('address_appartment').value,
                     postCode:document.getElementById('postCode_appartment').value
                         
@@ -639,7 +668,7 @@
                     servicetype:$("#servicetype .active-btn").attr("data-type"),
                     orderid:Math.random().toString().slice(2,11),
                     amount:document.getElementById('amount_commercial').innerHTML= 50000,
-                    //wastetype:document.getElementById('wastetype').value,
+                   wastetype:document.getElementById('demo').innerHTML,
                     address:document.getElementById('address_commercial').value,
                     postCode:document.getElementById('postCode_commercial').value
                         
